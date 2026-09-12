@@ -2,196 +2,585 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b08">
 <title>Santuario del Hermano Saúl</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-    /* Fondo oscuro estilo VSL */
+    :root {
+        --bg: #0d0b08;
+        --bg-card: #1a160f;
+        --bg-card-2: #211b12;
+        --border: #33291a;
+        --gold: #e6a13a;
+        --gold-light: #f4c569;
+        --orange: #ff8c00;
+        --text: #f5f0e6;
+        --text-dim: #b7ac97;
+        --text-mute: #8a806e;
+        --font-display: 'Cormorant Garamond', Georgia, serif;
+        --font-body: 'Mulish', Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
     body {
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: #0d0d0d;
-        color: #ffffff;
+        font-family: var(--font-body);
+        background-color: var(--bg);
+        color: var(--text);
         margin: 0;
-        padding: 20px;
-        line-height: 1.5;
+        padding: 0;
+        line-height: 1.6;
+        font-size: 18px;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: transparent;
     }
-    .container {
-        max-width: 800px;
+    img { max-width: 100%; display: block; }
+    .wrap {
+        max-width: 900px;
         margin: 0 auto;
-        text-align: center;
+        padding: 20px;
     }
-    /* Tipografía */
-    h1 {
-        font-size: 28px;
-        color: #ffffff;
-        margin-bottom: 15px;
-        line-height: 1.3;
+    section { padding: 40px 0; }
+    h1, h2 {
+        font-family: var(--font-display);
+        color: var(--text);
+        line-height: 1.2;
+        font-weight: 700;
     }
-    p.descripcion {
-        font-size: 16px;
-        color: #a3a3a3;
-        margin-bottom: 30px;
-        max-width: 90%;
-        margin-left: auto;
-        margin-right: auto;
+    .eyebrow {
+        color: var(--gold);
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: block;
+        font-family: var(--font-body);
     }
-    /* Botones con Resplandor (Glow) */
-    .btn {
-        display: inline-block;
+
+    /* ===== BARRA FLOTANTE (aparece al hacer scroll) ===== */
+    .sticky-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #17130c;
+        border-bottom: 1px solid var(--border);
+        padding: 10px 16px;
+        padding-top: max(10px, env(safe-area-inset-top));
+        display: flex;
+        justify-content: center;
+        z-index: 999;
+        transform: translateY(-110%);
+        transition: transform 0.3s ease;
+    }
+    .sticky-bar.show { transform: translateY(0); }
+    .sticky-bar a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         background: linear-gradient(90deg, #ff5100, #ff8c00);
         color: #ffffff;
-        padding: 16px 24px;
         text-decoration: none;
-        font-size: 18px;
-        font-weight: bold;
+        font-weight: 700;
+        font-size: 16px;
+        padding: 10px 22px;
+        border-radius: 999px;
+        width: 100%;
+        max-width: 420px;
+        justify-content: center;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+        text-align: center;
+        padding: 30px 0 20px 0;
+    }
+    .hero-img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        max-height: 340px;
+        border-radius: 20px;
+        margin: 0 0 24px 0;
+        background:
+            radial-gradient(circle at 20% 20%, rgba(244,197,105,0.35), transparent 55%),
+            radial-gradient(circle at 80% 70%, rgba(230,161,58,0.25), transparent 50%),
+            linear-gradient(160deg, #2a2013, #14100a);
+        border: 1px solid var(--border);
+        box-shadow: 0 0 50px rgba(230,161,58,0.25);
+        object-fit: cover;
+        object-position: center 25%;
+        /* Reemplazar este div por: <img class="hero-img" src="hermano-saul.jpg" alt="Hermano Saúl" loading="eager" decoding="async"> con una foto real.
+           object-position controla qué parte de la foto se ve al recortarse en pantallas angostas; ajusta el 25% si la cara queda cortada. */
+    }
+    .hero h1 { font-size: 34px; margin-bottom: 14px; }
+    .hero p.descripcion {
+        font-size: 19px;
+        color: var(--text-dim);
+        max-width: 90%;
+        margin: 0 auto 26px auto;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 0 0 6px 0;
+    }
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #1a1206;
+        padding: 18px 20px;
+        text-decoration: none;
+        font-family: var(--font-body);
+        font-size: 20px;
+        font-weight: 700;
         border-radius: 12px;
-        margin: 10px 0;
-        width: 90%;
-        max-width: 400px;
         border: none;
         cursor: pointer;
-        /* Destello naranja fuerte en los botones */
-        box-shadow: 0 0 25px rgba(255, 102, 0, 0.6);
-        transition: box-shadow 0.3s ease;
+        transition: box-shadow 0.3s ease, transform 0.15s ease;
     }
-    .btn:hover {
-        /* El destello crece al pasar el mouse/dedo */
-        box-shadow: 0 0 40px rgba(255, 102, 0, 0.9);
+    .btn:active { transform: scale(0.98); }
+    .btn-llamar {
+        background: linear-gradient(90deg, #f4c569, #e6a13a);
+        color: #1a1206;
+        box-shadow: 0 0 25px rgba(230,161,58,0.5);
     }
-    .micro-texto {
-        font-size: 12px;
-        color: #777777;
-        margin-top: 5px;
-        margin-bottom: 25px;
-        display: block;
+    .btn-llamar:hover { box-shadow: 0 0 40px rgba(230,161,58,0.8); }
+    .btn-whatsapp {
+        background: linear-gradient(90deg, #ff5100, #ff8c00);
+        color: #ffffff;
+        box-shadow: 0 0 25px rgba(255,102,0,0.6);
     }
-    /* Contenedor del Video con súper resplandor naranja */
+    .btn-whatsapp:hover { box-shadow: 0 0 40px rgba(255,102,0,0.9); }
+    .btn-full { width: 100%; max-width: 500px; margin: 0 auto; }
+
+    .confidencial {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--gold-light);
+        letter-spacing: 0.3px;
+    }
+    .confidencial .punto {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold-light);
+    }
+
+    /* ===== VIDEO ===== */
     .video-box {
         width: 100%;
         aspect-ratio: 16 / 9;
         background-color: #000000;
+        border-radius: 20px;
+        border: 2px solid var(--gold);
+        overflow: hidden;
+        box-shadow: 0 0 60px rgba(230,161,58,0.3), 0 0 120px rgba(230,161,58,0.15);
+    }
+    .video-box iframe { width: 100%; height: 100%; border: none; }
+
+    /* ===== ATENCIÓN PRESENCIAL (rediseñado) ===== */
+    .presencial { text-align: center; }
+    .presencial h2 { font-size: 27px; margin: 0 0 6px 0; }
+    .presencial .sub { color: var(--text-dim); font-size: 16px; margin: 0 0 22px 0; }
+    .ciudades {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .ciudades li {
+        font-family: var(--font-body);
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text);
+        background-color: transparent;
+        border: 1px solid var(--gold);
+        border-radius: 999px;
+        padding: 10px 20px;
+        letter-spacing: 0.2px;
+    }
+
+    /* ===== SERVICIOS ===== */
+    .section-title { text-align: center; margin-bottom: 28px; }
+    .section-title h2 { font-size: 28px; }
+    .servicios-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .servicio-card {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        text-align: left;
+    }
+    .servicio-img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        display: block;
+    }
+    .servicio-card .servicio-texto {
+        padding: 20px 22px 22px 22px;
+    }
+    .servicio-simbolo {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 20px; 
-        border: 2px solid #ff7300;
-        margin-bottom: 50px;
-        overflow: hidden;
-        /* Destello naranja de fondo brutal */
-        box-shadow: 0 0 60px rgba(255, 115, 0, 0.4), 0 0 120px rgba(255, 115, 0, 0.2);
-    }
-    .video-box iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-    /* Tarjetas de Testimonios */
-    .testimonios-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        margin: 40px 0;
-    }
-    .tarjeta {
-        background-color: #1a1a1a;
-        padding: 20px;
-        border-radius: 12px;
-        border: 1px solid #333333;
-        text-align: left;
-    }
-    .estrellas {
-        color: #FFD700;
         font-size: 18px;
-        margin-bottom: 10px;
+        color: var(--gold-light);
+        margin-bottom: 14px;
+        font-family: var(--font-display);
     }
-    .texto-testimonio {
+    .servicio-card h3 { font-family: var(--font-display); font-size: 21px; margin: 0 0 8px 0; color: var(--text); font-weight: 700; }
+    .servicio-card p { font-size: 16px; color: var(--text-dim); margin: 0 0 14px 0; }
+    .servicio-card a {
         font-size: 15px;
-        color: #cccccc;
-        margin-bottom: 15px;
-        font-style: italic;
-    }
-    .autor {
-        font-weight: bold;
-        font-size: 14px;
-        color: #ffffff;
-    }
-    .ubicacion {
-        font-size: 12px;
-        color: #888888;
-    }
-    /* Disclaimer camuflado */
-    .disclaimer {
-        font-size: 11px;
-        color: #444444;
-        text-align: justify;
-        margin-top: 50px;
-        padding-top: 20px;
-        border-top: 1px solid #222222;
+        color: var(--gold-light);
+        text-decoration: none;
+        font-weight: 700;
     }
 
-    @media (min-width: 600px) {
-        h1 { font-size: 34px; }
-        .testimonios-grid { flex-direction: row; }
-        .tarjeta { flex: 1; }
+    /* ===== PASOS ===== */
+    .pasos {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .paso {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background-color: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px;
+    }
+    .paso-numero {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        color: #1a1206;
+        font-weight: 700;
+        font-family: var(--font-display);
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .paso h3 { font-family: var(--font-display); margin: 0 0 4px 0; font-size: 19px; font-weight: 700; }
+    .paso p { margin: 0; font-size: 15px; color: var(--text-dim); }
+
+    /* ===== TESTIMONIOS ===== */
+    .testimonios-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .tarjeta {
+        background-color: var(--bg-card);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        text-align: left;
+    }
+    .estrellas { color: var(--gold-light); font-size: 19px; margin-bottom: 10px; letter-spacing: 2px; }
+    .texto-testimonio { font-size: 17px; color: var(--text-dim); margin-bottom: 15px; font-style: italic; }
+    .autor { font-weight: 700; font-size: 15px; color: var(--text); }
+    .ubicacion { font-size: 13px; color: var(--text-mute); }
+
+    /* ===== FAQ ===== */
+    .faq-item {
+        background-color: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 4px 18px;
+        margin-bottom: 12px;
+    }
+    .faq-item summary {
+        font-size: 17px;
+        font-weight: 700;
+        padding: 16px 0;
+        cursor: pointer;
+        color: var(--text);
+    }
+    .faq-item p { font-size: 16px; color: var(--text-dim); margin: 0 0 16px 0; }
+
+    /* ===== CTA FINAL ===== */
+    .cta-final {
+        text-align: center;
+        background: radial-gradient(ellipse at 50% 0%, rgba(230,161,58,0.18), transparent 70%), var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 40px 20px;
+    }
+    .cta-final h2 { font-size: 28px; margin-bottom: 10px; }
+    .cta-final p { color: var(--text-dim); margin-bottom: 22px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+        border-top: 1px solid var(--border);
+        padding-top: 30px;
+        margin-top: 10px;
+        text-align: center;
+    }
+    footer .contacto { font-size: 16px; color: var(--text-dim); margin-bottom: 18px; }
+    footer .contacto a { color: var(--gold-light); text-decoration: none; }
+
+    .disclaimer {
+        font-size: 11px;
+        color: #5a5142;
+        text-align: justify;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 359px) {
+        body { font-size: 16px; }
+        .wrap { padding: 16px; }
+        .hero h1 { font-size: 28px; }
+        .hero p.descripcion { font-size: 17px; }
+        .btn { font-size: 17px; padding: 16px 14px; }
+        section { padding: 30px 0; }
+        .ciudades li { font-size: 14px; padding: 8px 14px; }
+    }
+
+    @media (min-width: 640px) {
+        .hero h1 { font-size: 42px; }
+        .hero-img { aspect-ratio: 21 / 9; }
+        .hero-actions { flex-direction: row; justify-content: center; }
+        .btn-full { width: auto; flex: 1; max-width: 340px; }
+        .servicios-grid { grid-template-columns: 1fr 1fr; }
+        .pasos { grid-template-columns: repeat(3, 1fr); }
+        .testimonios-grid { grid-template-columns: 1fr 1fr 1fr; }
     }
 </style>
 </head>
 <body>
 
-<div class="container">
-    
-    <!-- ENCABEZADO -->
-    <h1>Rompe el Estancamiento y Recupera la Tranquilidad de tu Hogar con el Tarot Espiritual</h1>
-    <p class="descripcion">Mira este corto video para descubrir cómo identificar las energías que están frenando tu progreso y qué pasos tomar para liberar tus caminos. Sin falsas promesas, solo claridad para que vuelvas a avanzar.</p>
-    
-    <!-- CTA SUPERIOR CON EVENTO CONTACT -->
-    <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%20quiero%20una%20consulta" target="_blank" class="btn" onclick="fbq('track', 'Contact');">👉 Quiero Hablar con Saúl por WhatsApp</a>
-    <span class="micro-texto">Tu consulta es 100% privada y confidencial.</span>
+<!-- ===== BARRA FLOTANTE DE WHATSAPP (aparece al bajar) ===== -->
+<div class="sticky-bar" id="stickyBar">
+    <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%2C%20Quiero%20hacer%20mi%20primera%20consulta." target="_blank" onclick="fbq('track', 'Contact');">💬 Escribir por WhatsApp</a>
+</div>
 
-    <!-- ÁREA DEL VIDEO (YOUTUBE EMBED LIMPIO) -->
-    <!-- Agregué ?controls=0&modestbranding=1&rel=0 para limpiar la UI lo más posible -->
-    <div class="video-box">
-        <iframe src="https://www.youtube.com/embed/--4SNl4B89c?controls=0&modestbranding=1&rel=0" title="Video Guía Espiritual" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="wrap">
+
+    <!-- ===== HERO ===== -->
+    <div class="hero" id="hero">
+        <img class="hero-img" src="https://raw.githubusercontent.com/centroespiritistasaul-1/hermanosaul/main/banner%20hero.webp" alt="Hermano Saúl" loading="eager" decoding="async">
+        <h1>Rompe el Estancamiento y Recupera la Paz de tu Hogar</h1>
+        <p class="descripcion">Mira este video corto. Te ayuda a entender qué está frenando tus caminos y qué hacer para avanzar de nuevo.</p>
+
+        <div class="hero-actions">
+            <a href="tel:+50370286549" class="btn btn-llamar btn-full">📞 Llamar Ahora</a>
+            <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%2C%20Quiero%20hacer%20mi%20primera%20consulta." target="_blank" class="btn btn-whatsapp btn-full" onclick="fbq('track', 'Contact');">💬 Escribir por WhatsApp</a>
+        </div>
+        <span class="confidencial"><span class="punto"></span>100% Confidencial</span>
     </div>
 
-    <!-- CTAS INFERIORES CON EVENTO CONTACT -->
-    <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%20quiero%20una%20consulta" target="_blank" class="btn" onclick="fbq('track', 'Contact');">🟢 Ayúdame a Limpiar mi Energía</a>
-    <br>
-    <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%20quiero%20una%20consulta" target="_blank" class="btn" onclick="fbq('track', 'Contact');">✨ Quiero una Lectura de Cartas Ahora</a>
-
-    <!-- SECCIÓN DE TESTIMONIOS -->
-    <div class="testimonios-grid">
-        
-        <div class="tarjeta">
-            <div class="estrellas">⭐⭐⭐⭐⭐</div>
-            <p class="texto-testimonio">"Mi negocio estaba completamente estancado, todo se me volvía agua. Saúl me ayudó a limpiar la mala energía que me habían puesto. Hoy por fin vuelvo a ver ganancias."</p>
-            <div class="autor">Roberto M.</div>
-            <div class="ubicacion">📍 San Salvador</div>
+    <!-- ===== VIDEO ===== -->
+    <section>
+        <div class="video-box">
+            <iframe src="https://www.youtube.com/embed/--4SNl4B89c?controls=0&modestbranding=1&rel=0" title="Video Guía Espiritual" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+    </section>
 
-        <div class="tarjeta">
-            <div class="estrellas">⭐⭐⭐⭐⭐</div>
-            <p class="texto-testimonio">"En mi casa no había paz, puras peleas de la nada y una pesadez horrible. Las cartas dijeron la verdad y desde que limpiamos el hogar, la tranquilidad regresó a mi familia."</p>
-            <div class="autor">Carmen L.</div>
-            <div class="ubicacion">📍 San Miguel</div>
+    <!-- ===== ATENCIÓN PRESENCIAL ===== -->
+    <section>
+        <div class="presencial">
+            <h2>Atención Presencial Todos los Días</h2>
+            <p class="sub">Visítanos en cualquiera de nuestras sedes</p>
+            <ul class="ciudades">
+                <li>San Salvador</li>
+                <li>San Vicente</li>
+                <li>San Miguel</li>
+                <li>Santa Ana</li>
+                <li>Sonsonate</li>
+            </ul>
         </div>
+    </section>
 
-        <div class="tarjeta">
-            <div class="estrellas">⭐⭐⭐⭐⭐</div>
-            <p class="texto-testimonio">"Mis siembras no daban y la mala racha me tenía desesperado. Entendí que la envidia me había trancado los caminos. Gracias al hermano Saúl, mi suerte cambió."</p>
-            <div class="autor">Don Antonio</div>
-            <div class="ubicacion">📍 Santa Ana</div>
+    <!-- ===== SERVICIOS ===== -->
+    <section>
+        <div class="section-title">
+            <span class="eyebrow">Nuestros servicios</span>
+            <h2>Cómo te podemos orientar</h2>
         </div>
+        <div class="servicios-grid">
+            <div class="servicio-card">
+                <img class="servicio-img" src="https://raw.githubusercontent.com/centroespiritistasaul-1/hermanosaul/main/lectura%20de%20cartas.jpg" alt="Lectura de cartas" loading="lazy" decoding="async">
+                <div class="servicio-texto">
+                    <h3>Lectura de Cartas</h3>
+                    <p>Una guía clara sobre lo que viene en tu camino, en el amor, el trabajo o la familia.</p>
+                    <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%2C%20quiero%20una%20lectura%20de%20cartas.">Quiero mi lectura →</a>
+                </div>
+            </div>
+            <div class="servicio-card">
+                <img class="servicio-img" src="https://raw.githubusercontent.com/centroespiritistasaul-1/hermanosaul/main/limpieza%20energ%C3%A9tica.jpg" alt="Limpieza energética" loading="lazy" decoding="async">
+                <div class="servicio-texto">
+                    <h3>Limpieza Energética</h3>
+                    <p>Para cuando sientes el ambiente pesado en casa o el trabajo y quieres recuperar la calma.</p>
+                    <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%2C%20quiero%20una%20limpieza%20energ%C3%A9tica.">Quiero mi limpieza →</a>
+                </div>
+            </div>
+            <div class="servicio-card">
+                <img class="servicio-img" src="https://raw.githubusercontent.com/centroespiritistasaul-1/hermanosaul/main/Orientaci%C3%B3n%20Espiritual.jpg" alt="Orientación espiritual" loading="lazy" decoding="async">
+                <div class="servicio-texto">
+                    <h3>Orientación Espiritual</h3>
+                    <p>Un espacio para conversar tu situación y recibir consejo con calma y respeto.</p>
+                    <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%2C%20quiero%20una%20orientaci%C3%B3n%20espiritual.">Quiero mi orientación →</a>
+                </div>
+            </div>
+            <div class="servicio-card">
+                <img class="servicio-img" src="https://raw.githubusercontent.com/centroespiritistasaul-1/hermanosaul/main/Consulta%20astrologica.jpg" alt="Consulta astrológica" loading="lazy" decoding="async">
+                <div class="servicio-texto">
+                    <h3>Consulta Astrológica</h3>
+                    <p>Entiende los ciclos que estás viviendo y cómo aprovecharlos a tu favor.</p>
+                    <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%2C%20quiero%20una%20consulta%20astrol%C3%B3gica.">Quiero mi consulta →</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    </div>
+    <!-- ===== CÓMO FUNCIONA ===== -->
+    <section>
+        <div class="section-title">
+            <span class="eyebrow">Cómo funciona</span>
+            <h2>Tu consulta en 3 pasos</h2>
+        </div>
+        <div class="pasos">
+            <div class="paso">
+                <div class="paso-numero">1</div>
+                <div><h3>Escríbenos o llama</h3><p>Contamos tu situación por WhatsApp o llamada, sin compromiso.</p></div>
+            </div>
+            <div class="paso">
+                <div class="paso-numero">2</div>
+                <div><h3>Consulta personalizada</h3><p>El hermano Saúl te escucha y te orienta según tu caso.</p></div>
+            </div>
+            <div class="paso">
+                <div class="paso-numero">3</div>
+                <div><h3>Acompañamiento</h3><p>Te guiamos paso a paso mientras avanzas en tu proceso.</p></div>
+            </div>
+        </div>
+    </section>
 
-    <!-- DISCLAIMER ANTI-BANEO META -->
-    <p class="disclaimer">
-        <strong>Descargo de Responsabilidad:</strong> Los servicios de guía espiritual, lectura de tarot y limpieza energética ofrecidos en este sitio tienen fines exclusivamente de orientación personal, cultural y entretenimiento. En ningún momento sustituyen la atención, diagnóstico, asesoría o tratamiento de médicos, psicólogos, abogados o asesores financieros profesionales. No se garantizan curaciones a enfermedades físicas, ni resultados específicos, ya que las experiencias varían de persona a persona. Al hacer clic y contactar nuestros servicios, confirmas que eres mayor de 18 años y comprendes la naturaleza espiritual y orientativa de estas consultas. Este sitio no forma parte de la red de Facebook o Meta Platforms, Inc.
-    </p>
+    <!-- ===== TESTIMONIOS ===== -->
+    <section>
+        <div class="section-title">
+            <span class="eyebrow">Lo que dicen</span>
+            <h2>Historias de nuestros visitantes</h2>
+        </div>
+        <div class="testimonios-grid">
+            <div class="tarjeta">
+                <div class="estrellas">★★★★★</div>
+                <p class="texto-testimonio">"Mi negocio estaba estancado, todo se me iba de las manos. El hermano Saúl me ayudó a limpiar esa energía pesada. Hoy vuelvo a ver ganancias."</p>
+                <div class="autor">Roberto M.</div>
+                <div class="ubicacion">San Salvador</div>
+            </div>
+            <div class="tarjeta">
+                <div class="estrellas">★★★★★</div>
+                <p class="texto-testimonio">"En mi casa no había paz, puras peleas y una pesadez rara. Desde que hicimos la limpieza, la tranquilidad regresó a mi familia."</p>
+                <div class="autor">Carmen L.</div>
+                <div class="ubicacion">San Miguel</div>
+            </div>
+            <div class="tarjeta">
+                <div class="estrellas">★★★★★</div>
+                <p class="texto-testimonio">"Mis siembras no daban y la mala racha me tenía desesperado. Entendí que algo me estaba trancando los caminos. Gracias al hermano Saúl, mi suerte cambió."</p>
+                <div class="autor">Don Antonio</div>
+                <div class="ubicacion">Santa Ana</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section>
+        <div class="section-title">
+            <span class="eyebrow">Dudas frecuentes</span>
+            <h2>Antes de empezar</h2>
+        </div>
+        <details class="faq-item">
+            <summary>¿Cómo empiezo mi consulta?</summary>
+            <p>Solo escríbenos por WhatsApp o llámanos. Nos cuentas tu situación y te orientamos en el momento.</p>
+        </details>
+        <details class="faq-item">
+            <summary>¿Es confidencial?</summary>
+            <p>Sí. Tu consulta queda entre tú y el hermano Saúl.</p>
+        </details>
+        <details class="faq-item">
+            <summary>¿Atienden presencial o solo por WhatsApp?</summary>
+            <p>Ambas formas. Tenemos atención presencial todos los días en San Salvador, San Vicente, San Miguel, Santa Ana y Sonsonate, y también podemos orientarte por WhatsApp o llamada.</p>
+        </details>
+    </section>
+
+    <!-- ===== CTA FINAL ===== -->
+    <section>
+        <div class="cta-final">
+            <h2>No dejes pasar más tiempo</h2>
+            <p>Escríbenos hoy. La primera consulta es sin compromiso.</p>
+            <div class="hero-actions" style="justify-content:center;">
+                <a href="tel:+50370286549" class="btn btn-llamar btn-full">📞 Llamar Ahora</a>
+                <a href="https://wa.me/50368582492?text=Hola%20Hermano%20Sa%C3%BAl%2C%20Quiero%20hacer%20mi%20primera%20consulta." target="_blank" class="btn btn-whatsapp btn-full" onclick="fbq('track', 'Contact');">💬 Escribir por WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p class="contacto">
+            <a href="tel:+50370286549">+503 7028-6549</a> &nbsp;·&nbsp;
+            <a href="https://wa.me/50368582492">WhatsApp</a><br>
+            Atención presencial: San Salvador · San Vicente · San Miguel · Santa Ana · Sonsonate
+        </p>
+
+        <p class="disclaimer">
+            <strong>Descargo de Responsabilidad:</strong> Los servicios de guía espiritual, lectura de tarot y limpieza energética ofrecidos en este sitio tienen fines exclusivamente de orientación personal, cultural y entretenimiento. En ningún momento sustituyen la atención, diagnóstico, asesoría o tratamiento de médicos, psicólogos, abogados o asesores financieros profesionales. No se garantizan curaciones a enfermedades físicas, ni resultados específicos, ya que las experiencias varían de persona a persona. Al hacer clic y contactar nuestros servicios, confirmas que eres mayor de 18 años y comprendes la naturaleza espiritual y orientativa de estas consultas. Este sitio no forma parte de la red de Facebook o Meta Platforms, Inc.
+        </p>
+    </footer>
 
 </div>
+
+<script>
+    var heroEl = document.getElementById('hero');
+    var stickyBar = document.getElementById('stickyBar');
+    if (window.IntersectionObserver) {
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    stickyBar.classList.remove('show');
+                } else {
+                    stickyBar.classList.add('show');
+                }
+            });
+        }, { threshold: 0 });
+        observer.observe(heroEl);
+    }
+</script>
 
 </body>
 </html>
