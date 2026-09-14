@@ -144,6 +144,14 @@ src="https://www.facebook.com/tr?id=1063427686418912&ev=PageView&noscript=1"
         max-width: 90%;
         margin: 0 auto 26px auto;
     }
+    .oferta-gratis {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--gold-light);
+        max-width: 90%;
+        margin: 0 auto 24px auto;
+    }
+    .oferta-gratis strong { font-weight: 800; }
 
     .hero-actions {
         display: flex;
@@ -387,6 +395,7 @@ src="https://www.facebook.com/tr?id=1063427686418912&ev=PageView&noscript=1"
         .hero-actions { flex-direction: row; justify-content: center; }
         .btn-full { width: auto; flex: 1; max-width: 340px; }
         .servicios-grid { grid-template-columns: 1fr 1fr; }
+        .servicio-full { grid-column: 1 / -1; max-width: 48%; margin: 0 auto; }
         .pasos { grid-template-columns: repeat(3, 1fr); }
         .testimonios-grid { grid-template-columns: 1fr 1fr 1fr; }
     }
@@ -404,8 +413,8 @@ src="https://www.facebook.com/tr?id=1063427686418912&ev=PageView&noscript=1"
     <!-- ===== HERO ===== -->
     <div class="hero" id="hero">
         <img class="hero-img" src="banner-3.jpg" alt="Hermano Saúl" loading="eager" decoding="async">
-        <h1>Rompe el Estancamiento y Recupera la Paz de tu Hogar</h1>
-        <p class="descripcion">Mira este video corto. Te ayuda a entender qué está frenando tus caminos y qué hacer para avanzar de nuevo.</p>
+        <h1>Recupera la Paz, el Bienestar y la Abundancia de tu Hogar</h1>
+        <p class="oferta-gratis">Llama ahora y recibe una <strong>CONSULTA SIN COSTO</strong></p>
 
         <div class="hero-actions">
             <a href="tel:+50370286549" class="btn btn-llamar btn-full" onclick="fbq('trackCustom', 'LLamadaClick');">📞 Llamar Ahora</a>
@@ -416,6 +425,7 @@ src="https://www.facebook.com/tr?id=1063427686418912&ev=PageView&noscript=1"
 
     <!-- ===== VIDEO ===== -->
     <section>
+        <p class="descripcion" style="text-align:center; margin-top:0;">Mira este video corto. Te ayuda a entender qué está frenando tus caminos y qué hacer para avanzar de nuevo.</p>
         <div class="video-box">
             <iframe src="https://www.youtube.com/embed/--4SNl4B89c?controls=0&modestbranding=1&rel=0" title="Video Guía Espiritual" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
@@ -446,13 +456,13 @@ src="https://www.facebook.com/tr?id=1063427686418912&ev=PageView&noscript=1"
             <div class="servicio-card">
                 <div class="servicio-simbolo">✦</div>
                 <h3>Lectura de Cartas</h3>
-                <p>Una guía clara sobre lo que viene en tu camino, en el amor, el trabajo o la familia.</p>
+                <p>Envíame tu fecha de nacimiento y te guiamos a resolver tus dudas en el campo del amor, el bienestar y el dinero.</p>
                 <a href="https://wa.me/50370286549?text=Hola%20Hermano%20Sa%C3%BAl%2C%20quiero%20una%20lectura%20de%20cartas." onclick="fbq('trackCustom', 'WSPClick');">Quiero mi lectura →</a>
             </div>
             <div class="servicio-card">
                 <div class="servicio-simbolo">◆</div>
                 <h3>Limpieza Energética</h3>
-                <p>Para cuando sientes el ambiente pesado en casa o el trabajo y quieres recuperar la calma.</p>
+                <p>Para liberar malas energías de tu casa, negocio, trabajo o relación sentimental.</p>
                 <a href="https://wa.me/50370286549?text=Hola%20Hermano%20Sa%C3%BAl%2C%20quiero%20una%20limpieza%20energ%C3%A9tica." onclick="fbq('trackCustom', 'WSPClick');">Quiero mi limpieza →</a>
             </div>
             <div class="servicio-card">
@@ -463,9 +473,15 @@ src="https://www.facebook.com/tr?id=1063427686418912&ev=PageView&noscript=1"
             </div>
             <div class="servicio-card">
                 <div class="servicio-simbolo">☾</div>
-                <h3>Consulta Astrológica</h3>
-                <p>Entiende los ciclos que estás viviendo y cómo aprovecharlos a tu favor.</p>
-                <a href="https://wa.me/50370286549?text=Hola%20Hermano%20Sa%C3%BAl%2C%20quiero%20una%20consulta%20astrol%C3%B3gica." onclick="fbq('trackCustom', 'WSPClick');">Quiero mi consulta →</a>
+                <h3>Liberación Espiritual</h3>
+                <p>Te ayudamos a liberar cargas y bloqueos energéticos, para que recuperes el equilibrio entre tu cuerpo y tu espíritu.</p>
+                <a href="https://wa.me/50370286549?text=Hola%20Hermano%20Sa%C3%BAl%2C%20quiero%20una%20liberaci%C3%B3n%20espiritual." onclick="fbq('trackCustom', 'WSPClick');">Quiero mi liberación →</a>
+            </div>
+            <div class="servicio-card servicio-full">
+                <div class="servicio-simbolo">❁</div>
+                <h3>Florecimiento de Amor</h3>
+                <p>Fortalece los lazos sentimentales y encuentra armonía cuando sientes que la relación se enfría.</p>
+                <a href="https://wa.me/50370286549?text=Hola%20Hermano%20Sa%C3%BAl%2C%20quiero%20un%20florecimiento%20de%20amor." onclick="fbq('trackCustom', 'WSPClick');">Quiero mi consulta →</a>
             </div>
         </div>
     </section>
